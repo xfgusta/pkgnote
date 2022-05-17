@@ -1,4 +1,4 @@
-# pkgnote - read packaging metadata
+# pkgnote
 
 A utility to read an ELF file and print its packaging metadata. It looks for the note section header of type `0xCAFE1A7E` (`.note.packaging`) and extracts the owner and value, following the specification.
 
