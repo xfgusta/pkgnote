@@ -4,7 +4,7 @@ A utility to read an ELF file and print its packaging metadata. It looks for the
 
 **Section header**
 
-```
+```ascii
 SECTION: `.note.package`
 note type: `0xcafe1a7e`
 Owner: `FDO` (FreeDesktop.org)
@@ -35,7 +35,7 @@ See [Package Metadata for Core Files](https://systemd.io/COREDUMP_PACKAGE_METADA
 + gcc
 + libelf
 
-```
+```ascii
 git clone https://github.com/xfgusta/pkgnote
 cd pkgnote
 make
