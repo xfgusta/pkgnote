@@ -45,3 +45,4 @@ make
 ## TODO
 
 + Add a -k option to print a specific key
++ Add man page
