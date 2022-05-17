@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
 
     ident = elf_getident(elf, NULL);
     if(!ident || strncmp(ident, "\177ELF", 3)) {
-        fprintf(stderr, "File %s is not a ELF\n", filename);
+        fprintf(stderr, "File %s is not an ELF\n", filename);
         exit(1);
     }
 
