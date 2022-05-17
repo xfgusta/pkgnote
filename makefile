@@ -8,14 +8,14 @@ BINDIR=$(PREFIX)/bin
 
 INSTALL=install -p
 
-all: rpkgnote
+all: pkgnote
 
 install: all
 	mkdir -p $(BINDIR)
-	$(INSTALL) -m 0755 rpkgnote $(BINDIR)
+	$(INSTALL) -m 0755 pkgnote $(BINDIR)
 
 uninstall:
-	rm -f $(BINDIR)/rpkgnote
+	rm -f $(BINDIR)/pkgnote
 
 clean:
-	rm -f rpkgnote
+	rm -f pkgnote

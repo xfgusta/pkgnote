@@ -1,4 +1,4 @@
-# rpkgnote - read packaging metadata
+# pkgnote - read packaging metadata
 
 A utility to read an ELF file and print its packaging metadata. It looks for the note section header of type `0xCAFE1A7E` (`.note.packaging`) and extracts the owner and value, following the specification.
 
@@ -23,7 +23,7 @@ Value: a single JSON object encoded as a zero-terminated UTF-8 string
 }
 ```
 
-Run `rpkgnote FILE` to print the JSON object or `rpkgnote -o FILE` to print the owner.
+Run `pkgnote FILE` to print the JSON object or `pkgnote -o FILE` to print the owner.
 
 See [Package Metadata for Core Files](https://systemd.io/COREDUMP_PACKAGE_METADATA) for the overview and details.
 
@@ -36,8 +36,8 @@ See [Package Metadata for Core Files](https://systemd.io/COREDUMP_PACKAGE_METADA
 + libelf
 
 ```
-git clone https://github.com/xfgusta/rpkgnote
-cd rpkgnote
+git clone https://github.com/xfgusta/pkgnote
+cd pkgnote
 make
 ```
 

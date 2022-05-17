@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
                 printf("Usage: %s [-hv] [-o] FILE\n", argv[0]);
                 exit(0);
             case 'v':
-                puts("rpkgnote-v0.1.0");
+                puts("pkgnote-v0.1.0");
                 exit(0);
             case 'o':
                 print_owner_opt = true;
