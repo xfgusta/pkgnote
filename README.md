@@ -34,6 +34,7 @@ See [Package Metadata for Core Files](https://systemd.io/COREDUMP_PACKAGE_METADA
 + make
 + gcc
 + libelf
++ json-c
 
 ```ascii
 git clone https://github.com/xfgusta/pkgnote
@@ -43,6 +44,4 @@ make
 
 ## TODO
 
-+ Use json-c to parse the JSON object
-    + Add a -p option to pretty print
-    + Add a -k option to print a specific key
++ Add a -k option to print a specific key

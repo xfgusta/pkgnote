@@ -9,10 +9,14 @@
 #include <libelf.h>
 #include <gelf.h>
 #include <stdbool.h>
+#include <json-c/json.h>
+
+#define USAGE "Usage: %s [-hv] [-o] [-p] FILE\n"
 
 int main(int argc, char *argv[]) {
     int opt;
     bool print_owner_opt = false;
+    bool pretty_print_opt = false;
     char *filename;
     int fd;
     Elf *elf;
@@ -22,10 +26,10 @@ int main(int argc, char *argv[]) {
     char *owner = NULL;
     char *value = NULL;
 
-    while((opt = getopt(argc, argv, "hvo")) != -1) {
+    while((opt = getopt(argc, argv, "hvop")) != -1) {
         switch(opt) {
             case 'h':
-                printf("Usage: %s [-hv] [-o] FILE\n", argv[0]);
+                printf(USAGE, argv[0]);
                 exit(0);
             case 'v':
                 puts("pkgnote-v0.1.0");
@@ -33,11 +37,14 @@ int main(int argc, char *argv[]) {
             case 'o':
                 print_owner_opt = true;
                 break;
+            case 'p':
+                pretty_print_opt = true;
+                break;
         }
     }
 
     if(argc - optind != 1) {
-        fprintf(stderr, "Usage: %s [-hv] [-o] FILE\n", argv[0]);
+        fprintf(stderr, USAGE, argv[0]);
         exit(1);
     }
 
@@ -106,13 +113,30 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    if(owner && value) {
-        if(print_owner_opt)
-            puts(owner);
+    if(!(owner && value))
+        goto end;
+
+    if(print_owner_opt)
+        puts(owner);
+    else {
+        json_object *obj = NULL;
+        int flags = JSON_C_TO_STRING_NOSLASHESCAPE;
+
+        obj = json_tokener_parse(value);
+        if(!obj)
+            goto end;
+
+        if(pretty_print_opt)
+            flags |= JSON_C_TO_STRING_PRETTY | JSON_C_TO_STRING_SPACED;
         else
-            puts(value);
+            flags |= JSON_C_TO_STRING_PLAIN;
+
+        puts(json_object_to_json_string_ext(obj, flags));
+
+        json_object_put(obj);
     }
 
+end:
     elf_end(elf);
     close(fd);
 
