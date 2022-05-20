@@ -20,7 +20,6 @@ int main(int argc, char *argv[]) {
     char *filename;
     int fd;
     Elf *elf;
-    char *ident;
     size_t phnum;
     int r;
     char *owner = NULL;
@@ -68,8 +67,7 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    ident = elf_getident(elf, NULL);
-    if(!ident || strncmp(ident, "\177ELF", 3)) {
+    if(elf_kind(elf) != ELF_K_ELF) {
         fprintf(stderr, "File %s is not an ELF\n", filename);
         exit(1);
     }
